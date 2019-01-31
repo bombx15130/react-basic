@@ -1,12 +1,26 @@
 import React from 'react';
-import CalApp from './containers/CalApp';
-
-
+import NavBar from './components/NavBar'
+import { BrowserRouter as Router, Route } from "react-router-dom"
+import routes from './routes'
 
 const App = () => (
-  <div>
-      <CalApp />
-  </div>
+  <Router>
+    <div>
+        <NavBar />
+        {
+          routes.map((routes) => (
+            <Route  key={routes.key}
+                    exact={routes.exact}
+                    path={routes.path}
+                    component={routes.component}
+            />
+          ))
+        }
+        {/* <Route exact path="/" component={Index} />
+        <Route path="/calculate" component={CalApp} /> */}
+        {/* <Route path="/TodoList" component={TodoList} /> */}
+    </div>
+  </Router>
 )
 
 export default App
