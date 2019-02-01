@@ -12,7 +12,7 @@ const navBar = () => {
                     <Link to="/calculate">Calculate</Link>
                 </li>
                 <li>
-                    <Link to="/todoList">TodoList</Link>
+                    <Link to="/todoApp">TodoList</Link>
                 </li>
             </ul>
         </div>
