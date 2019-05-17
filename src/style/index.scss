@@ -1,0 +1,53 @@
+.shopping{
+    width: 100%;
+    background: #f5f5f5;
+    .shoppingNav{
+        width: 100%;
+        background: #fff;
+        // background: #ccc;
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.033);;
+        .shoppingNavWrap{
+            height: 50px;
+            width: 1200px;
+            margin: auto;
+            // background: #999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    .contentWrap{
+        
+        width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        li{
+            padding: 10px;
+            background: #fff;
+            box-sizing: border-box;
+            width: 260px;
+            margin: 10px 10px;
+            .productPic{
+                min-height: 200px;
+            }
+            p{
+                padding: 5px 0px;
+            }
+            .productPrice{
+                margin-bottom: 10px;
+            }
+            .productQuantity{
+                margin-bottom: 30px;
+                input{
+                    width: 20px;
+                    text-align: center;
+                }
+            }
+            .productBtn{
+                display: block;
+                margin: auto;
+            }
+        }
+    }
+}

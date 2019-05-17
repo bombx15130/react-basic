@@ -1,7 +1,8 @@
-import Index from './components/Index'
+import Index from './containers/Index'
 import CalApp from './containers/CalApp'
 import TodoApp from './containers/TodoApp'
-
+import ClockApp from './containers/ClockApp'
+import GameApp from './containers/GameApp'
 
 const routes = [
     {
@@ -21,6 +22,18 @@ const routes = [
         path: '/todoApp',
         exact: true,
         component: TodoApp
+    },
+    {
+        key: 4,
+        path: '/clockApp',
+        exact: true,
+        component: ClockApp
+    },
+    {
+        key: 5,
+        path: '/gameApp',
+        exact: true,
+        component: GameApp
     }
 ]
 

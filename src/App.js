@@ -2,6 +2,10 @@ import React from 'react';
 import NavBar from './components/NavBar'
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import routes from './routes'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faShoppingCart)
 
 const App = () => (
   <Router>

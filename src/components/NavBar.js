@@ -1,20 +1,28 @@
 import React, { Component} from 'react'
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 const navBar = () => {
     return (
-        <div className="wrapNavBar">
-            <ul className="navBar">
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/calculate">Calculate</Link>
-                </li>
-                <li>
-                    <Link to="/todoApp">TodoList</Link>
-                </li>
-            </ul>
+        <div className="nav">
+            <div className="wrapNavBar">
+                <ul className="navBar">
+                    <li>
+                        <NavLink to="/" exact={true} activeClassName="navActive">Shopping</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/calculate" activeClassName="navActive">Calculate</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/todoApp" activeClassName="navActive">TodoList</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/clockApp" activeClassName="navActive">Clock</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/gameApp" activeClassName="navActive">Game</NavLink>
+                    </li>
+                </ul>
+            </div>
         </div>
     )
 }
