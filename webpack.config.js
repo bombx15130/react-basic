@@ -8,7 +8,7 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
-  mode:'production',
+  mode:'development',
   entry:{
     index:'./src/index.js'
   } ,
@@ -51,7 +51,7 @@ module.exports = {
   devServer: {
     compress: true,
     historyApiFallback: true,
-    port: 8080
+    port: 8090
   },
   plugins:[
     HTMLWebpackPluginConfig

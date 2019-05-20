@@ -14,6 +14,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            .shoppingCartWrap{
+                position: relative;
+                .shoppingCart{
+                    position: absolute;
+                    top:40px;
+                    right: 0;
+                    width: 300px;
+                    min-height: 300px;
+                    background: #ccc;
+                }
+            }
         }
     }
     .contentWrap{
