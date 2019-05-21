@@ -19,70 +19,102 @@ class Quantity extends Component{
     constructor(props){
         super(props)
         this.state={
-            quantity: 0
-        }
-        this.cal = this.cal.bind(this)
-    }
-    cal(symbol){
-        
-        if(symbol === '+'){
-            this.setState({quantity: this.state.quantity + 1})
-            this.props.getQ(this.state.quantity + 1)
-        } else {
-            if(this.state.quantity === 0) return
-            this.setState({quantity: this.state.quantity - 1})
-            this.props.getQ(this.state.quantity - 1)
+            quantity: this.props.productQ
         }
     }
+    decrease = () => {
+        if(this.state.quantity === 1) return
+        this.setState(preState => (
+            {quantity: preState.quantity - 1}
+        ), () => {
+            this.props.getQ(this.state.quantity)
+        })
+    }
+    increase = () => {
+        this.setState(preState => (
+            {quantity: preState.quantity + 1}
+        ), () => {
+            this.props.getQ(this.state.quantity)
+        })
+    }
+    // sendData = () => {
+    //     this.setState({
+    //         value: this.refs.itemQ.value
+    //     },() => {
+    //         this.props.getQ(this.state.quantity)
+    //     })
+    // }
     render() {
         return (
             <div className="productQuantity">
-                <button onClick={this.cal.bind(this, '-')}>-</button>
-                <input type="text" value={this.state.quantity}/>
-                <button onClick={this.cal.bind(this, '+')}>+</button>
+                <button onClick={this.decrease}>-</button>
+                <input type="text" value={this.state.quantity} readOnly/>
+                {/* <input type="text" value={this.state.quantity} ref="itemQ" onChange={this.sendData}/> */}
+                <button onClick={this.increase}>+</button>
             </div>
         )
     }
 }
 
-class Items extends Component{
+class ShopItem extends Component{
     constructor(props) {
         super(props)
         this.state = {
-           value: 0
+           value: 1           
         }
     }
-    getQ(quantity){
+    getQ = (quantity) => {
         this.setState({
             value: quantity
         })
     }
-    setData(item) {
-        console.log(this.state.value)
-        if(this.state.value === 0) return
+    setData = () => {
+        console.log('XXXXXXXx', this.state.value)
         let info = {
-            no: item.no,
-            url: item.url,
-            title: item.title,
-            price: item.price,
+            no: this.props.shopNo,
+            url: this.props.picUrl,
+            title: this.props.shopTitle,
+            price: this.props.shopPrice,
             quantity: this.state.value,
-            sum: Number(item.price) * Number(this.state.value)
+            sum: Number(this.props.shopPrice) * Number(this.state.value)
         }
-        this.props.setShoppingCart(info)
+        this.props.passShopInfo(info)
     }
     render() {
         return (
+            <li>
+                <div className="productPic">
+                    <img src={this.props.picUrl}/>
+                </div>
+                <p className="productTitle">{this.props.shopTitle}</p>
+                <p className="productPrice">{this.props.shopPrice}</p>
+                <Quantity getQ={this.getQ} productQ={this.state.value}/>
+                <button className="productBtn" onClick={this.setData}>加入購物車</button>
+            </li>
+        )
+    }
+}
+class Items extends Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+           
+        }
+    }
+    render() {
+        console.log(this.props.shopData)
+        return (
+            
             this.props.shopData.map((item, index) => {
                 return (
-                    <li key={item.no}>
-                        <div className="productPic">
-                            <img src={item.url}/>
-                        </div>
-                        <p className="productTitle">{item.title}</p>
-                        <p className="productPrice">{item.price}</p>
-                        <Quantity getQ={this.getQ.bind(this)}/>
-                        <button className="productBtn" onClick={this.setData.bind(this, item)}>加入購物車</button>
-                    </li>
+                    <ShopItem
+                        key={item.no}
+                        shopNo={item.no}
+                        picUrl={item.url}
+                        shopTitle={item.title}
+                        shopPrice={item.price}
+                        passShopInfo={this.props.setShoppingCart}
+                    />
                 )
             })
         )
@@ -100,7 +132,7 @@ class CartItem extends Component{
                     <tr key={index}>
                         <td><img src={item.url}/></td>
                         <td>{item.title}</td>
-                        <td>{item.price}</td>
+                        <td>${item.price}</td>
                         <td>{item.quantity}</td>
                         <td>{item.sum}</td>
                         <td>X</td>
@@ -119,27 +151,37 @@ class Cart extends Component{
         }
     }
     render() {
-        console.log(this.props.shoppingData)
         if(this.props.shoppingData.length === 0) {
             return (
                 <div></div>
             )
         } else {
+            // 計算總金額
+            const data = this.props.shoppingData
+            let total = 0
+            for (let i = 0; i < data.length; i++) {
+                total = total + Number(data[i].sum)
+            }
+
             return(
                 <div className="shoppingCart">
                     <table className="shopContent">
-                        <tr>
-                            <th>商品圖片</th>
-                            <th>商品名稱</th>
-                            <th>價格</th>
-                            <th>數量</th>
-                            <th>小計</th>
-                            <th>刪除</th>
-                        </tr>
-                         <CartItem itemInfo={this.props.shoppingData}/>
+                        <thead>
+                            <tr>
+                                <th>商品圖片</th>
+                                <th>商品名稱</th>
+                                <th>價格</th>
+                                <th>數量</th>
+                                <th>小計</th>
+                                <th>刪除</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <CartItem itemInfo={this.props.shoppingData}/>
+                        </tbody>
                     </table>
                     <div className="shopTotal">
-                        <span>總金額:{this.state.total}</span>
+                        <span>總金額:{total}</span>
                     </div>
                 </div> 
              )
@@ -163,7 +205,6 @@ class shopping extends Component{
             // 修改價格跟數量
             list[index].quantity = Number(list[index].quantity) + Number(item.quantity)
             list[index].sum = Number(list[index].quantity) * Number(item.price)
-            console.log('XXXXXXXXXXXXx', list)
             this.setState({
                 shoppingCart: list
             })
@@ -173,10 +214,8 @@ class shopping extends Component{
             this.setState({
                 isOption: isOptionArr,
                 shoppingCart: itemArr
-            })
+            },)
         }
-        // console.log('bbb', this.state.isOption)
-        // console.log('aaa', this.state.shoppingCart)
     }
     render() {
         return(
@@ -184,7 +223,7 @@ class shopping extends Component{
                 <div className="shoppingNav">
                     <div className="shoppingNavWrap">
                         <input />
-                        <div class="shoppingCartWrap">
+                        <div className="shoppingCartWrap">
                             <FontAwesomeIcon icon="shopping-cart" />
                             <p>0</p>
                             <Cart shoppingData={this.state.shoppingCart}/>
