@@ -153,7 +153,7 @@ class Cart extends Component{
     render() {
         if(this.props.shoppingData.length === 0) {
             return (
-                <div></div>
+                <div className="shoppingCart"></div>
             )
         } else {
             // 計算總金額
