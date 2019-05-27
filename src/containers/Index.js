@@ -1,18 +1,29 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import img1 from '../assets/product1.jpg'
+import img2 from '../assets/product2.jpg'
+import img3 from '../assets/product3.jpg'
+import img4 from '../assets/product4.jpg'
+import img5 from '../assets/product5.jpg'
+import img6 from '../assets/product6.jpg'
+import img7 from '../assets/product7.jpg'
+import img8 from '../assets/product8.jpg'
+import img9 from '../assets/product9.jpg'
+import img10 from '../assets/product10.jpg'
+import img11 from '../assets/product11.jpg'
 
 const shopData = [
-    {no: 1, title: '商品1', price: '200', quantity: '1', url: ''},
-    {no: 2, title: '商品2', price: '200', quantity: '1', url: ''},
-    {no: 3, title: '商品3', price: '200', quantity: '1', url: ''},
-    {no: 4, title: '商品4', price: '200', quantity: '1', url: ''},
-    {no: 5, title: '商品5', price: '200', quantity: '1', url: ''},
-    {no: 6, title: '商品6', price: '200', quantity: '1', url: ''},
-    {no: 7, title: '商品7', price: '200', quantity: '1', url: ''},
-    {no: 8, title: '商品8', price: '200', quantity: '1', url: ''},
-    {no: 9, title: '商品9', price: '200', quantity: '1', url: ''},
-    {no: 10, title: '商品10', price: '200', quantity: '1', url: ''},
-    {no: 11, title: '商品11', price: '200', quantity: '1', url: ''}
+    {no: 1, title: '商品1', price: '450', quantity: '1', url: img1 },
+    {no: 2, title: '商品2', price: '300', quantity: '1', url: img2 },
+    {no: 3, title: '商品3', price: '500', quantity: '1', url: img3 },
+    {no: 4, title: '商品4', price: '750', quantity: '1', url: img4 },
+    {no: 5, title: '商品5', price: '450', quantity: '1', url: img5 },
+    {no: 6, title: '商品6', price: '810', quantity: '1', url: img6 },
+    {no: 7, title: '商品7', price: '430', quantity: '1', url: img7 },
+    {no: 8, title: '商品8', price: '560', quantity: '1', url: img8 },
+    {no: 9, title: '商品9', price: '730', quantity: '1', url: img9 },
+    {no: 10, title: '商品10', price: '999', quantity: '1', url: img10 },
+    {no: 11, title: '商品11', price: '899', quantity: '1', url: img11 }
 ]
 
 class Quantity extends Component{
@@ -134,7 +145,7 @@ class CartItem extends Component{
                         <td>{item.title}</td>
                         <td>${item.price}</td>
                         <td>{item.quantity}</td>
-                        <td>{item.sum}</td>
+                        <td>${item.sum}</td>
                         <td>X</td>
                     </tr>
                 )
@@ -164,26 +175,33 @@ class Cart extends Component{
             }
 
             return(
-                <div className="shoppingCart">
-                    <table className="shopContent">
-                        <thead>
-                            <tr>
-                                <th>商品圖片</th>
-                                <th>商品名稱</th>
-                                <th>價格</th>
-                                <th>數量</th>
-                                <th>小計</th>
-                                <th>刪除</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <CartItem itemInfo={this.props.shoppingData}/>
-                        </tbody>
-                    </table>
-                    <div className="shopTotal">
-                        <span>總金額:{total}</span>
+                <div>
+                    <div className="shoppingCart">
+                        <table className="shopContent">
+                            <thead>
+                                <tr>
+                                    <th>商品圖片</th>
+                                    <th>商品名稱</th>
+                                    <th>價格</th>
+                                    <th>數量</th>
+                                    <th>小計</th>
+                                    <th>刪除</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <CartItem itemInfo={this.props.shoppingData}/>
+                            </tbody>
+                        </table>
+                        
                     </div>
-                </div> 
+                    <div className="shopTotal">
+                        <div className="shopTotalContent">
+                            <span>結帳</span>
+                            <span>${total}</span>
+                        </div>
+                    </div>
+                </div>
+                
              )
         }
     }
