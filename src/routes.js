@@ -1,4 +1,4 @@
-import Index from './containers/Index'
+import Index from './containers/Shopping/Index'
 import CalApp from './containers/CalApp'
 import TodoApp from './containers/TodoApp'
 import ClockApp from './containers/ClockApp'
